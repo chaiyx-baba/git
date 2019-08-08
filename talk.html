@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="./element-ui/index.css">
+  <link rel="stylesheet" href="./css/common-style.css">
+  <title>磋商</title>
+</head>
+
+<body>
+  <div id="app">
+    <el-row>
+      <el-col :span="16">
+          <el-tabs type="border-card">
+              <el-tab-pane v-for="n in num" :key="n">
+                <span slot="label"> {{n}} <i class="el-icon-close" @click="num--"></i></span>
+                <el-row>
+                  <el-col :span="6">供应商状态：在线</el-col>
+                  <el-col :span="18" style="padding-left: 80px">
+                    电料采购项目
+                  </el-col>
+                </el-row>
+                <el-tabs type="border-card" style="margin-top:10px">
+                  <el-tab-pane label="包1">
+                    <el-table :data="tableData" border header-cell-class-name="new_table_header" style="width: 100%">
+                      <el-table-column type="index"  label="序号" width="50" align="center">
+                      </el-table-column>
+                      <el-table-column prop="name" label="标的名称" width="180" align="center">
+                      </el-table-column>
+                      <el-table-column prop="address" label="规格型号" align="center">
+                      </el-table-column>
+                      <el-table-column label="单位" align="center">
+                      </el-table-column>
+                      <el-table-column label="询价数量" align="center">
+                      </el-table-column>
+                      <el-table-column label="控制价" align="center">
+                      </el-table-column>
+                      <el-table-column label="单价（元）" align="center">
+                      </el-table-column>
+                      <el-table-column label="提供数量" align="center">
+                      </el-table-column>
+                      <el-table-column label="总价（元）" align="center">
+                        </el-table-column>
+                      <el-table-column label="货期" align="center">
+                      </el-table-column>
+                      <el-table-column label="生产日期" align="center">
+                      </el-table-column>
+                      <el-table-column label="厂家" align="center">
+                      </el-table-column>
+                      <el-table-column label="备注" align="center">
+                      </el-table-column>
+                    </el-table>
+                    <el-row style="margin-top: 20px">
+                      <el-col style="text-align:center">
+                        <el-button size="small" type="primary">报价</el-button>
+                      </el-col>
+                    </el-row>
+                  </el-tab-pane>
+                  <el-tab-pane >
+                      <span slot="label"><span style="color:red">*</span>其他附件</span>
+                      <el-row style="text-align:center;font-size:18px;font-weight:700;margin-bottom:50px">其他附件</el-row>
+                      <el-row>
+                        <el-col :span="8" style="text-align:right">附件：</el-col>
+                        <el-col :span="16">
+                            <el-upload
+                            class="upload-demo"
+                            action="https://jsonplaceholder.typicode.com/posts/"
+                            :on-preview="handlePreview"
+                            :file-list="fileList">
+                            <el-button size="mini" type="primary">点击上传</el-button>
+                          </el-upload>
+                        </el-col>
+                      </el-row>
+                  </el-tab-pane>
+                  <el-tab-pane>
+                    <span slot="label"><span style="color:red">*</span>其他询价项</span>
+                    <el-table :data="tableData" border header-cell-class-name="new_table_header" style="width: 100%">
+                        <el-table-column type="index"  label="序号" width="50" align="center">
+                        </el-table-column>
+                        <el-table-column prop="name" label="内容" align="center">
+                        </el-table-column>
+                        <el-table-column prop="address" label="要求/说明" align="center">
+                        </el-table-column>
+                        <el-table-column label="响应" align="center">
+                          <template slot-scope="scope">
+                            <el-input size="mini"></el-input>
+                          </template>
+                        </el-table-column>
+                      </el-table>
+                      <el-row style="margin-top:20px;text-align:center">
+                        <el-button size="small">暂存</el-button>
+                        <el-button size="small" type="primary">提交</el-button>
+                      </el-row>
+                </el-tab-pane>
+                 
+                </el-tabs>
+              </el-tab-pane>
+        
+            </el-tabs>
+      </el-col>
+      <el-col :span="8">
+        <div style="width:95%;height:600px;margin: 80px auto 0;border:1px solid #ddd;position: relative;">
+          <div style="top:0;left:0;width:100%;">
+            <el-row style="text-align:center;height:30px;line-height: 30px">2018-07-14  18:09:34</el-row>
+          </div>
+          <div style="width:100%;height:400px;overflow-y: auto">
+            <el-row>
+              <el-row>
+                  <el-col style="text-align:left;padding-left:8px;font-size: 14px;color:red" :span="24">供应商A</el-col>
+              </el-row>
+              <el-row>
+                  <el-col style="text-align:left;padding-left:20px" :span="24">
+                    <span style="display: inline-block;height:35px;line-height:35px;font-size:14px;border-radius:4px;background: #016dcc;color:white;padding:0 8px">你是</span>
+                  </el-col>
+              </el-row>
+
+            </el-row>
+          </div>
+          <el-row style="width:95%;margin:0 auto">
+            <el-input></el-input>
+          </el-row>
+          <el-row style="width:95%;margin:10px auto;text-align:right">
+            <el-button size="small">结束磋商</el-button>
+            <el-button size="small" type="primary">发送</el-button>
+          </el-row>
+        </div>
+      </el-col>
+    </el-row>
+
+    <el-dialog title="历史报价" :visible.sync="dialog" width="80%">
+      <el-tabs type="border-card">
+        <el-tab-pane v-for="n in num" :key="n">
+          <span slot="label"> {{n}} <i class="el-icon-close"></i></span>
+          <el-tabs type="border-card" style="margin-top:10px">
+            <el-tab-pane label="用户管理">
+              <el-table :data="tableData" style="width: 100%">
+                <el-table-column prop="date" label="日期" width="180">
+                </el-table-column>
+                <el-table-column prop="name" label="姓名" width="180">
+                </el-table-column>
+                <el-table-column prop="address" label="地址">
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="配置管理">配置管理</el-tab-pane>
+            <el-tab-pane label="角色管理">角色管理</el-tab-pane>
+            <el-tab-pane label="定时任务补偿">定时任务补偿</el-tab-pane>
+          </el-tabs>
+        </el-tab-pane>
+
+      </el-tabs>
+    </el-dialog>
+  </div>
+  <script src="./vue.js"></script>
+  <script src="./element-ui/index.js"></script>
+  <script>
+    var app = new Vue({
+      data: {
+        fileList:[],
+        dialog: false,
+        num: 4,
+        tableData: [{
+          date: '2016-05-02',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1518 弄'
+        }, {
+          date: '2016-05-04',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1517 弄'
+        }, {
+          date: '2016-05-01',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1519 弄'
+        }, {
+          date: '2016-05-03',
+          name: '王小虎',
+          address: '上海市普陀区金沙江路 1516 弄'
+        }]
+      },
+      methods:{
+        handlePreview(file) {
+        console.log(file);
+      },
+      }
+    }).$mount("#app")
+  </script>
+</body>
+
+</html>
